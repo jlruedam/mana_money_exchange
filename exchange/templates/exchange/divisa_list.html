@@ -1,16 +1,84 @@
 {% extends 'exchange/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Administrar Divisas - Mana Money Exchange{% endblock %}
 
 {% block content %}
-<div class="divisa-list-container">
-  <h1>Divisas</h1>
-  <a href="{% url 'divisa_create' %}" class="button">Crear nueva divisa</a>
-  <ul class="divisa-list">
-    {% for divisa in divisas %}
-      <li class="divisa-item">
-        <span>{{ divisa.nombre }} - Compra: {{ divisa.compra|intcomma }} - Venta: {{ divisa.venta|intcomma }}</span>
-        <a href="{% url 'divisa_edit' pk=divisa.pk %}" class="button">Editar</a>
-      </li>
-    {% endfor %}
-  </ul>
+<section class="hero-section">
+    <header>
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icon"><span class="material-symbols-outlined">menu</span></label>
+        <nav class="nav-menu">
+            <a href="/"><img src="{% static 'exchange/img/logoblue.png' %}" alt="Logo azul de Mana Money Exchange"></a>
+            <ul>
+                <li><a href="/#nosotros"><span class="material-symbols-outlined">info</span>Nosotros</a></li>
+                <li><a href="/#Calculadora"><span class="material-symbols-outlined">calculate</span>Calculadora</a></li>
+                <li><a href="/#oficina"><span class="material-symbols-outlined">location_on</span>Oficina</a></li>
+                <li><a href="https://wa.link/0eqprb" target="_blank"><span class="material-symbols-outlined">chat</span>Contáctanos</a></li>
+                <li><a href="{% url 'divisa_list' %} "><span class="material-symbols-outlined">currency_exchange</span>Administrar Divisas</a></li>
+            </ul>
+        </nav>
+        <div class="logo">
+            <a href="/">
+                <img class="logo-img-white" src="{% static 'exchange/img/mana_logowhite.png' %}" alt="Logo de Mana Money Exchange">
+            </a>
+        </div>
+        <div class="false-div">
+        </div>
+    </header>
+
+    <div class="divisa-list-container">
+        <h1>Administrar Divisas</h1>
+        <button id="open-modal-btn" class="button">Crear nueva divisa</button>
+        <ul class="divisa-list">
+            {% for divisa in divisas %}
+            <li class="divisa-item">
+                <div class="divisa-info">
+                    <img src="https://flagcdn.com/{{ divisa.bandera }}.svg" alt="Bandera de {{ divisa.nombre }}" class="divisa-flag">
+                    <span>{{ divisa.nombre }}</span>
+                    <span>Compra: {{ divisa.compra|intcomma }}</span>
+                    <span>Venta: {{ divisa.venta|intcomma }}</span>
+                </div>
+                <div class="divisa-actions">
+                    <button class="button edit-btn" 
+                            data-pk="{{ divisa.pk }}"
+                            data-nombre="{{ divisa.nombre }}"
+                            data-compra="{{ divisa.compra }}"
+                            data-venta="{{ divisa.venta }}"
+                            data-bandera="{{ divisa.bandera }}">Editar</button>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+
+<!-- Modal para Crear/Editar Divisa -->
+<div id="divisa-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h1 id="modal-title">Crear Divisa</h1>
+        <form id="divisa-form" method="post" action="{% url 'divisa_create' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_nombre" class="form-label">Nombre:</label>
+                {{ form.nombre }}
+            </div>
+            <div class="form-group">
+                <label for="id_compra" class="form-label">Compra:</label>
+                {{ form.compra }}
+            </div>
+            <div class="form-group">
+                <label for="id_venta" class="form-label">Venta:</label>
+                {{ form.venta }}
+            </div>
+            <div class="form-group">
+                <label for="id_bandera" class="form-label">Bandera:</label>
+                {{ form.bandera }}
+            </div>
+            <button type="submit" class="button">Guardar</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
