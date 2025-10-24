@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -26,66 +27,18 @@
               <h3>Compra</h3>
               <h3>Venta</h3>
           </div>       
+          {% for divisa in divisas %}
           <div class="tv-view-info">
-              <img src="{% static 'exchange/img/usa.png' %}" alt="Dolar Flag">
-              <h2>Dolar</h2>
+              <img src="{% static 'exchange/banderas/'|add:divisa.bandera %}" alt="Bandera de {{ divisa.nombre }}">
+              <h2>{{ divisa.nombre }}</h2>
               <p>
-                1000
+                {{ divisa.compra|intcomma }}
               </p>
               <p>
-                2000
+                {{ divisa.venta|intcomma }}
               </p>
           </div>
-          <div class="tv-view-info">
-              <img src="{% static 'exchange/img/usa.png' %}" alt="Dolar Flag">
-              <h2>Dolar</h2>
-              <p>
-                1000
-              </p>
-              <p>
-                2000
-              </p>
-          </div>
-          <div class="tv-view-info">
-              <img src="{% static 'exchange/img/usa.png' %}" alt="Dolar Flag">
-              <h2>Dolar</h2>
-              <p>
-                1000
-              </p>
-              <p>
-                2000
-              </p>
-          </div>
-          <div class="tv-view-info">
-              <img src="{% static 'exchange/img/usa.png' %}" alt="Dolar Flag">
-              <h2>Dolar</h2>
-              <p>
-                1000
-              </p>
-              <p>
-                2000
-              </p>
-          </div>
-          <div class="tv-view-info">
-              <img src="{% static 'exchange/img/usa.png' %}" alt="Dolar Flag">
-              <h2>Dolar</h2>
-              <p>
-                1000
-              </p>
-              <p>
-                2000
-              </p>
-          </div>
-          <div class="tv-view-info">
-              <img src="{% static 'exchange/img/usa.png' %}" alt="Dolar Flag">
-              <h2>Dolar</h2>
-              <p>
-                1000
-              </p>
-              <p>
-                2000
-              </p>
-          </div>
+          {% endfor %}
       </div>
     </div>
 

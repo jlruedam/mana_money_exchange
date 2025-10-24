@@ -24,4 +24,5 @@ def calculate(request):
         return JsonResponse({'result': result})
 
 def tv_view(request):
-    return render(request, 'exchange/tv-view.html')
+    divisas = Divisa.objects.all()
+    return render(request, 'exchange/tv-view.html', {'divisas': divisas})
