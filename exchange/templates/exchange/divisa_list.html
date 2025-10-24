@@ -37,8 +37,8 @@
                 <div class="divisa-info">
                     <img src="https://flagcdn.com/{{ divisa.bandera }}.svg" alt="Bandera de {{ divisa.nombre }}" class="divisa-flag">
                     <span>{{ divisa.nombre }}</span>
-                    <span>Compra: {{ divisa.compra|intcomma }}</span>
-                    <span>Venta: {{ divisa.venta|intcomma }}</span>
+                    <span>Compra: ${{ divisa.compra|intcomma }}</span>
+                    <span>Venta: ${{ divisa.venta|intcomma }}</span>
                 </div>
                 <div class="divisa-actions">
                     <button class="button edit-btn" 
