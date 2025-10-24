@@ -258,7 +258,7 @@ header .false-div{
 .hero-content table{
     width: 90%;
     max-width: 100%;
-    height: 70dvh;
+    /* height: 70dvh; */ /* Removed fixed height */
     margin: 0 auto;
     margin-top: 2dvh;
     border-collapse: separate;
@@ -321,10 +321,10 @@ header .false-div{
     .hero-content table{
         width: 30%;
         min-width: 330px;
-        max-height: 80dvh;
+        /* max-height: 80dvh; */ /* Removed max-height */
         margin: 0;
         display: block;
-        overflow: hidden;
+        /* overflow: hidden; */ /* Removed overflow hidden */
     }
     .hero-content table thead{
         display: block;
@@ -332,7 +332,7 @@ header .false-div{
     }
     .hero-content table tbody{
         display: block;
-        max-height: 70dvh;
+        max-height: 70dvh; /* Keep max-height for scrollable body */
         overflow-y: scroll;
         overflow-x: hidden;
         scrollbar-width: none; 
@@ -1302,7 +1302,7 @@ main {
 }
 
 /* Divisa Form styles */
-#divisa-modal .divisa-form {
+#divisa-modal #divisa-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -1311,21 +1311,33 @@ main {
     border-radius: 8px;
 }
 
-#divisa-modal .divisa-form p {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+#divisa-modal #divisa-form .form-group {
+    margin-bottom: 15px;
 }
 
-#divisa-modal .divisa-form label {
+#divisa-modal #divisa-form .form-label {
     color: var(--second-color); /* Darker color for better visibility */
     font-weight: bold;
     font-size: 1.1rem;
+    display: block;
+    margin-bottom: 5px;
 }
 
-#divisa-modal .divisa-form input[type="text"],
-#divisa-modal .divisa-form input[type="number"] {
+.flag-display {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.flag-icon {
+    width: 50px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+#divisa-modal #divisa-form input,
+#divisa-modal #divisa-form select {
     width: 100%;
     padding: 10px;
     border: 2px solid var(--second-color); /* Stronger border */
@@ -1336,14 +1348,14 @@ main {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-#divisa-modal .divisa-form input[type="text"]:focus,
-#divisa-modal .divisa-form input[type="number"]:focus {
+#divisa-modal #divisa-form input:focus,
+#divisa-modal #divisa-form select:focus {
     outline: none;
     border-color: var(--first-color);
     box-shadow: 0 0 0 3px rgba(33, 135, 212, 0.3); /* Focus style */
 }
 
-#divisa-modal .divisa-form .button {
+#divisa-modal #divisa-form .button {
     width: 100%;
     margin-top: 10px;
     padding: 12px;
@@ -1356,7 +1368,7 @@ main {
     transition: background-color 0.3s ease;
 }
 
-#divisa-modal .divisa-form .button:hover {
+#divisa-modal #divisa-form .button:hover {
     background-color: var(--third-color);
 }
 

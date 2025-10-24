@@ -52,8 +52,26 @@ document.addEventListener('DOMContentLoaded', function() {
         const divisaForm = document.getElementById('divisa-form');
         const modalTitle = document.getElementById('modal-title');
         const editBtns = document.querySelectorAll('.edit-btn');
+        const banderaSelect = document.getElementById('id_bandera');
+        const selectedFlagDisplay = document.getElementById('selected-flag-display');
 
-        const formActionCreate = divisaForm.action;
+        // Function to update the flag display
+        function updateFlagDisplay(flagCode) {
+            if (flagCode) {
+                selectedFlagDisplay.innerHTML = `<img src="https://flagcdn.com/${flagCode}.svg" alt="Bandera" class="flag-icon">`;
+            } else {
+                selectedFlagDisplay.innerHTML = '';
+            }
+        }
+
+        // Event listener for bandera select change
+        if (banderaSelect) {
+            banderaSelect.addEventListener('change', (event) => {
+                updateFlagDisplay(event.target.value);
+            });
+        }
+
+        const formActionCreate = "/divisas/new/";
 
         // Open modal for creating
         openModalBtn.addEventListener('click', () => {
@@ -64,7 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('id_nombre').value = '';
             document.getElementById('id_compra').value = '';
             document.getElementById('id_venta').value = '';
-            document.getElementById('id_bandera').value = '';
+            if (banderaSelect) banderaSelect.value = ''; // Clear select
+            updateFlagDisplay(''); // Clear flag display
         });
 
         // Open modal for editing
@@ -74,13 +93,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 modalTitle.innerText = 'Editar Divisa';
                 
                 const pk = btn.dataset.pk;
-                const formActionEdit = `/divisa/${pk}/edit/`;
+                const formActionEdit = `/divisas/${pk}/edit/`;
                 divisaForm.action = formActionEdit;
 
                 document.getElementById('id_nombre').value = btn.dataset.nombre;
                 document.getElementById('id_compra').value = btn.dataset.compra;
                 document.getElementById('id_venta').value = btn.dataset.venta;
-                document.getElementById('id_bandera').value = btn.dataset.bandera;
+                if (banderaSelect) banderaSelect.value = btn.dataset.bandera;
+                updateFlagDisplay(btn.dataset.bandera); // Show existing flag
             });
         });
 
