@@ -33,7 +33,10 @@ def get_flag_choices():
 
 def flag_proxy(request, flag_code):
     try:
-        flag_url = f"https://flagcdn.com/w20/{flag_code}.png" # Using w20 for smaller size and png for broader support
+        # The flag_code from URL will include '.png', e.g., 'us.png'
+        # Strip the extension to get the actual country code for flagcdn.com
+        clean_flag_code = flag_code.replace('.png', '')
+        flag_url = f"https://flagcdn.com/w20/{clean_flag_code}.png" # Using w20 for smaller size and png for broader support
         response = requests.get(flag_url, stream=True)
         response.raise_for_status()
         content_type = response.headers.get('Content-Type', 'image/png')
