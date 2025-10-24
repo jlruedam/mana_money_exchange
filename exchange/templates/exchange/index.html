@@ -1,0 +1,250 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mana Money Exchange - Casa de Cambio en Cartagena | Mejores Tasas</title>
+    
+    <!-- Meta tags para SEO -->
+    <meta name="description" content="Casa de cambio en Cartagena con las mejores tasas de divisas. Más de 20 años de experiencia. Cambia dólares, euros y más de 15 divisas. Atención rápida y segura.">
+    <meta name="keywords" content="casa de cambio Cartagena, cambio de divisas Cartagena, cambiar dólares Cartagena, mejor tasa de cambio, exchange Cartagena, cambio de euros, divisas Colombia">
+    <meta name="author" content="Mana Money Exchange">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph para redes sociales -->
+    <meta property="og:title" content="Mana Money Exchange - Cambio de Divisas en Cartagena">
+    <meta property="og:description" content="Las mejores tasas de cambio en Cartagena. Más de 20 años de experiencia. Atención rápida, segura y transparente.">
+    <meta property="og:image" content="{% static 'exchange/img/mana_logowhite.png' %}">
+    <meta property="og:url" content="https://manamoneyexchange.com">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_CO">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mana Money Exchange - Casa de Cambio en Cartagena">
+    <meta name="twitter:description" content="Las mejores tasas de cambio en Cartagena. Más de 20 años de experiencia.">
+    <meta name="twitter:image" content="{% static 'exchange/img/mana_logowhite.png' %}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://manamoneyexchange.com">
+    
+    <link rel="icon" href="{% static 'exchange/img/icono_mana.png' %}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sansation:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="{% static 'exchange/styles.css' %}">
+    
+    <!-- Schema.org Structured Data -->
+    <script src="{% static 'exchange/schema.js' %}"></script>
+</head>
+<body>
+    <section class="hero-section" id="Precios">
+        <header>
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="menu-icon"><span class="material-symbols-outlined">menu</span></label>
+            <nav class="nav-menu">
+                <img src="{% static 'exchange/img/logoblue.png' %}" alt="Logo azul de Mana Money Exchange">
+                <ul>
+                    <li><a href="#nosotros"><span class="material-symbols-outlined">info</span>Nosotros</a></li>
+                    <li><a href="#Calculadora"><span class="material-symbols-outlined">calculate</span>Calculadora</a></li>
+                    <li><a href="#oficina"><span class="material-symbols-outlined">location_on</span>Oficina</a></li>
+                    <li><a href="https://wa.link/0eqprb" target="_blank"><span class="material-symbols-outlined">chat</span>Contáctanos</a></li>
+                </ul>
+            </nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img class="logo-img-white" src="{% static 'exchange/img/mana_logowhite.png' %}" alt="Logo de Mana Money Exchange">
+                </a>
+            </div>
+            <div class="false-div">
+            </div>
+        </header>
+
+        <div class="hero-content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Divisa</th>
+                        <th>Compra</th>
+                        <th>Venta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for divisa in divisas %}
+                    <tr>
+                        <td class="table-flag">
+                            <img src="{% static 'exchange/banderas/'|add:divisa.bandera %}" alt="Bandera de {{ divisa.nombre }}">{{ divisa.nombre }}
+                        </td>
+                        <td>{{ divisa.compra }}</td>
+                        <td>{{ divisa.venta }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="hero-info">
+                <h1>Cambio de divisas en Cartagena</h1>
+                <p>Mana Money Exchange tiene las mejores tasas de la ciudad</p>
+                <div class="hero-info-button">
+                    <ul>
+                        <li><a href="https://wa.link/0eqprb" target="_blank">Contáctanos</a></li>
+                        <li><a href="#oficina">Oficinas</a></li>
+                    </ul>
+                </div>
+                <p>El valor de nuestras divisas puede cambiar durante el dia</p>       
+            </div>
+        </div>         
+    </section>
+    <section class="second-section" id="Calculadora">
+        <div class="we-info">
+            <h2>¿Por qué elegir Mana Money Exchange?</h2>
+            <p>Somos una casa de cambio con mas de 20 años de experiencia en Cartagena.<br> Ofrecemos las mejores tasas de compra y venta de divisas, con atencion rapida, segura y trasparente.</p>
+            <img src="{% static 'exchange/img/moneypaper.png' %}" alt="Billetes de diferentes divisas internacionales">
+        </div>
+        <div class="calculator">
+            <form id="calculator-form">
+                {% csrf_token %}
+                <h2>Calcula tu cambio</h2>
+                <label for="Action">¿Que quieres hacer hoy?</label>
+                <select name="Action" id="Action" >
+                    <option value="Comprar">Comprar</option>
+                    <option value="Vender">Vender</option>
+                </select>
+                <label for="Currency">Selecciona la divisa</label>
+                <select name="Currency" id="Currency">
+                    {% for divisa in divisas %}
+                        <option value="{{ divisa.nombre }}">{{ divisa.nombre }}</option>
+                    {% endfor %}
+                </select>
+                <label for="Amount">¿Cuanto quieres cambiar?</label>
+                <input type="number" name="Amount" id="Amount" placeholder="Ingresa la cantidad">
+                <button type="submit">Calcular</button>
+                <p id="result"></p>
+            </form>
+        </div>
+    </section>
+    <section class="third-section" id="nosotros"> 
+        <h2>Beneficios de cambiar con nosotros</h2>
+        <div class="benefits-container">
+            <img class="benefits-img" src="{% static 'exchange/img/benefits-img.png' %}" alt="Imagen ilustrativa de beneficios de cambio de divisas">
+            <div class="benefit">
+                <div class="benefit-info">
+                    <img src="{% static 'exchange/img/b1.png' %}" alt="Icono de las mejores tasas del mercado">
+                    <div class="benefit-text">
+                        <h3>Las mejores tasas de la ciudad</h3>
+                        <p>Mana money exchange se caracteriza por prestar las mejores tasas a sus clientes</p>
+                    </div>
+                </div>
+                <div class="benefit-info">
+                    <img src="{% static 'exchange/img/b2.png' %}" alt="Icono de seguridad en transacciones">
+                    <div class="benefit-text">
+                        <h3>Seguridad</h3>
+                        <p>Contamos con una ubicación privilegiada en el corazon de la ciudad donde podrás realizar tu cambio de forma segura</p>
+                    </div>
+                </div>
+                <div class="benefit-info">
+                    <img src="{% static 'exchange/img/b3.png' %}" alt="Icono de cambio rápido y seguro">
+                    <div class="benefit-text">
+                        <h3>Cambio rapido y seguro</h3>
+                        <p>Nuestro sistema te permite realizar tus cambio de manera rápida y segura</p>
+                    </div>
+                </div>
+                <div class="benefit-info">
+                    <img src="{% static 'exchange/img/b4.png' %}" alt="Icono de amplia variedad de divisas">
+                    <div class="benefit-text">
+                        <h3>Amplia variedad de divisas</h3>
+                        <p>Contamos con mas de 15 divisas en nuestras oficinas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="fourth-section" id="oficina">
+        <h2>Oficina principal</h2>
+        <div class="office-container">
+            <picture>
+                <source media="(min-width: 950px)" srcset="{% static 'exchange/img/oficina-v.jpg' %}">
+                <source media="(max-width: 950px)" srcset="{% static 'exchange/img/oficina-h.jpg' %}">
+                <img src="{% static 'exchange/img/oficina-h.jpg' %}" alt="Oficina principal de Mana Money Exchange en Cartagena">
+            </picture>
+            <div class="office-address">
+                <h3>Visitanos</h3>
+                <h4>Horario</h4>
+                <p>Lunes a Sabado: 9:00 AM - 5:00 PM <br> Domingo: 8:00 AM - 2:00 PM</p>
+                <h4>ubicación</h4>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.9768599001823!2d-75.55213788907803!3d10.423410789661766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef62f114164d8b9%3A0x881f1f782136ad62!2sMana%20tours%20Cartagena!5e0!3m2!1ses-419!2sco!4v1760666062813!5m2!1ses-419!2sco" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <p>CALLE # 34 PORTOCARRERO #06-6, </p>
+                <div class="buttons-office">
+                    <ul>
+                        <li><a href="https://maps.app.goo.gl/a7M3jsvGcjutmyds9" target="_blank">Google maps</a></li>
+                        <li><a href="https://wa.link/0eqprb" target="_blank">Contactanos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="semi-footer">
+            <div class="semi-footer-container">
+                <img src="{% static 'exchange/img/Mana_logowhite2.png' %}" alt="Logo blanco de Mana Money Exchange">
+                <div class="footer-links">
+                <h2>Enlaces</h2>
+                    <nav>
+                        <ul>
+                            <li><a href="#Precios">Precios</a></li>
+                            <li><a href="#Calculadora">Calculadora</a></li>
+                            <li><a href="#oficina">Oficina</a></li>
+                            <li><a href="https.wa.link/0eqprb" target="_blank">Contactanos</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="contact-info">
+                    <h2>Contacto</h2>
+                    <p>+57 3016226750</p>
+                    <p>CALLE # 34 PORTOCARRERO #06-6, <br> El Centro, Cartagena de Indias </p>
+                    <p>info@manamoneyexchange.com</p>
+                </div>
+                <div class="social-media">
+                    <h2>Redes</h2>
+                    <ul>
+                        <li><a href="https://wa.link/0eqprb" target="_blank"><img src="{% static 'exchange/img/whatsapp.png' %}" alt="WhatsApp"></a></li>
+                        <li><a href="#"><img src="{% static 'exchange/img/instagram.png' %}" alt="Instagram"></a></li>
+                        <li><a href="#"><img src="{% static 'exchange/img/facebook.png' %}" alt="Facebookh"></a></li>
+                    </ul>
+                </div>  
+            </div>
+        </footer>
+        <p class="credits">@2025. Mana Money Exchange</p>
+    </section>
+
+    <!-- Script para animaciones con scroll -->
+    <script src="{% static 'exchange/script.js' %}"></script>
+<script>
+        document.getElementById('calculator-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const action = document.getElementById('Action').value;
+            const currency = document.getElementById('Currency').value;
+            const amount = document.getElementById('Amount').value;
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            fetch('/calculate/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({
+                    action: action,
+                    currency: currency,
+                    amount: amount
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = 'El resultado es: ' + data.result;
+            });
+        });
+    </script>
+</body>
+</html>
