@@ -29,7 +29,7 @@
           </div>       
           {% for divisa in divisas %}
           <div class="tv-view-info">
-              <img src="{% static 'exchange/banderas/'|add:divisa.bandera %}" alt="Bandera de {{ divisa.nombre }}">
+              <img src="https://flagcdn.com/{{ divisa.bandera }}.svg" alt="Bandera de {{ divisa.nombre }}">
               <h2>{{ divisa.nombre }}</h2>
               <p>
                 {{ divisa.compra|intcomma }}
