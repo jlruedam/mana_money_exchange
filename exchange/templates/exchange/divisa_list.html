@@ -35,7 +35,7 @@
             {% for divisa in divisas %}
             <li class="divisa-item">
                 <div class="divisa-info">
-                    <img src="https://flagcdn.com/{{ divisa.bandera }}.svg" alt="Bandera de {{ divisa.nombre }}" class="divisa-flag">
+                    <img src="{% url 'flag_proxy' flag_code=divisa.bandera %}" alt="Bandera de {{ divisa.nombre }}" class="divisa-flag">
                     <span>{{ divisa.nombre }}</span>
                     <span>Compra: ${{ divisa.compra|intcomma }}</span>
                     <span>Venta: ${{ divisa.venta|intcomma }}</span>
@@ -75,7 +75,11 @@
             </div>
             <div class="form-group">
                 <label for="id_bandera" class="form-label">Bandera:</label>
-                {{ form.bandera }}
+                <select name="bandera" id="id_bandera" class="form-control">
+                    {% for code, name, flag_url in flag_choices %}
+                        <option value="{{ code }}" data-flag-url="{{ flag_url }}" {% if form.bandera.value == code %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                </select>
                 <div id="selected-flag-display" class="flag-display"></div>
             </div>
             <button type="submit" class="button">Guardar</button>

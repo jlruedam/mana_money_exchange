@@ -41,7 +41,7 @@
                     {% for divisa in divisas %}
                     <tr>
                         <td class="table-flag">
-                            <img src="https://flagcdn.com/{{ divisa.bandera }}.svg" alt="Bandera de {{ divisa.nombre }}">{{ divisa.nombre }}
+                            <img src="{% url 'flag_proxy' flag_code=divisa.bandera %}" alt="Bandera de {{ divisa.nombre }}">{{ divisa.nombre }}
                         </td>
                         <td>${{ divisa.compra|intcomma }}</td>
                         <td>${{ divisa.venta|intcomma }}</td>

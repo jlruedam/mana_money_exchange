@@ -9,13 +9,11 @@ class DivisaForm(forms.ModelForm):
     def __init__(self, *args, flag_choices=None, **kwargs):
         super().__init__(*args, **kwargs)
         
-        if flag_choices is not None:
-            self.fields['bandera'] = forms.ChoiceField(
-                choices=flag_choices,
-                widget=forms.Select(attrs={'class': 'form-control'})
-            )
+        # The choices for 'bandera' will be rendered manually in the template
+        # We still need to ensure the widget is a Select and has the class
+        self.fields['bandera'].widget = forms.Select(attrs={'class': 'form-control'})
 
-        # Apply 'form-control' class to other fields as well
+        # Apply 'form-control' class to other fields
         for field_name, field in self.fields.items():
-            if field_name != 'bandera': # 'bandera' already has the class
+            if field_name != 'bandera': 
                 field.widget.attrs['class'] = 'form-control'

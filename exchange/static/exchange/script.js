@@ -56,9 +56,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedFlagDisplay = document.getElementById('selected-flag-display');
 
         // Function to update the flag display
-        function updateFlagDisplay(flagCode) {
-            if (flagCode) {
-                selectedFlagDisplay.innerHTML = `<img src="https://flagcdn.com/${flagCode}.svg" alt="Bandera" class="flag-icon">`;
+        function updateFlagDisplay(selectedOption) {
+            if (selectedOption && selectedOption.dataset.flagUrl) {
+                selectedFlagDisplay.innerHTML = `<img src="${selectedOption.dataset.flagUrl}" alt="Bandera" class="flag-icon">`;
             } else {
                 selectedFlagDisplay.innerHTML = '';
             }
@@ -67,7 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Event listener for bandera select change
         if (banderaSelect) {
             banderaSelect.addEventListener('change', (event) => {
-                updateFlagDisplay(event.target.value);
+                const selectedOption = event.target.options[event.target.selectedIndex];
+                updateFlagDisplay(selectedOption);
             });
         }
 
@@ -83,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('id_compra').value = '';
             document.getElementById('id_venta').value = '';
             if (banderaSelect) banderaSelect.value = ''; // Clear select
-            updateFlagDisplay(''); // Clear flag display
+            updateFlagDisplay(null); // Clear flag display
         });
 
         // Open modal for editing
@@ -99,8 +100,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('id_nombre').value = btn.dataset.nombre;
                 document.getElementById('id_compra').value = btn.dataset.compra;
                 document.getElementById('id_venta').value = btn.dataset.venta;
-                if (banderaSelect) banderaSelect.value = btn.dataset.bandera;
-                updateFlagDisplay(btn.dataset.bandera); // Show existing flag
+                if (banderaSelect) {
+                    banderaSelect.value = btn.dataset.bandera;
+                    const selectedOption = banderaSelect.options[banderaSelect.selectedIndex];
+                    updateFlagDisplay(selectedOption); // Show existing flag
+                }
             });
         });
 
