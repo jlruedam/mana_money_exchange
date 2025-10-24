@@ -1,0 +1,16 @@
+{% extends 'exchange/base.html' %}
+
+{% block content %}
+<div class="divisa-list-container">
+  <h1>Divisas</h1>
+  <a href="{% url 'divisa_create' %}" class="button">Crear nueva divisa</a>
+  <ul class="divisa-list">
+    {% for divisa in divisas %}
+      <li class="divisa-item">
+        <span>{{ divisa.nombre }} - Compra: {{ divisa.compra|intcomma }} - Venta: {{ divisa.venta|intcomma }}</span>
+        <a href="{% url 'divisa_edit' pk=divisa.pk %}" class="button">Editar</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
