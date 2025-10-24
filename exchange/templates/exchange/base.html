@@ -1,39 +1,53 @@
 {% load static %}
 {% load humanize %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mana Money Exchange</title>
+    <title>{% block title %}Mana Money Exchange - Casa de Cambio en Cartagena | Mejores Tasas{% endblock %}</title>
+    
+    <!-- Meta tags para SEO -->
+    <meta name="description" content="Casa de cambio en Cartagena con las mejores tasas de divisas. Más de 20 años de experiencia. Cambia dólares, euros y más de 15 divisas. Atención rápida y segura.">
+    <meta name="keywords" content="casa de cambio Cartagena, cambio de divisas Cartagena, cambiar dólares Cartagena, mejor tasa de cambio, exchange Cartagena, cambio de euros, divisas Colombia">
+    <meta name="author" content="Mana Money Exchange">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph para redes sociales -->
+    <meta property="og:title" content="Mana Money Exchange - Cambio de Divisas en Cartagena">
+    <meta property="og:description" content="Las mejores tasas de cambio en Cartagena. Más de 20 años de experiencia. Atención rápida, segura y transparente.">
+    <meta property="og:image" content="{% static 'exchange/img/mana_logowhite.png' %}">
+    <meta property="og:url" content="https://manamoneyexchange.com">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_CO">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mana Money Exchange - Casa de Cambio en Cartagena">
+    <meta property="twitter:description" content="Las mejores tasas de cambio en Cartagena. Más de 20 años de experiencia.">
+    <meta property="twitter:image" content="{% static 'exchange/img/mana_logowhite.png' %}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://manamoneyexchange.com">
+    
+    <link rel="icon" href="{% static 'exchange/img/icono_mana.png' %}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sansation:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="{% static 'exchange/styles.css' %}">
+    
+    <!-- Schema.org Structured Data -->
+    <script src="{% static 'exchange/schema.js' %}"></script>
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
-    <header>
-        <input type="checkbox" id="menu-toggle">
-        <label for="menu-toggle" class="menu-icon"><span class="material-symbols-outlined">menu</span></label>
-        <nav class="nav-menu">
-            <img src="{% static 'exchange/img/logoblue.png' %}" alt="Logo azul de Mana Money Exchange">
-            <ul>
-                <li><a href="{% url 'index' %}#nosotros"><span class="material-symbols-outlined">info</span>Nosotros</a></li>
-                <li><a href="{% url 'index' %}#Calculadora"><span class="material-symbols-outlined">calculate</span>Calculadora</a></li>
-                <li><a href="{% url 'index' %}#oficina"><span class="material-symbols-outlined">location_on</span>Oficina</a></li>
-                <li><a href="https://wa.link/0eqprb" target="_blank"><span class="material-symbols-outlined">chat</span>Contáctanos</a></li>
-                <li><a href="{% url 'divisa_list' %}"><span class="material-symbols-outlined">currency_exchange</span>Administrar Divisas</a></li>
-            </ul>
-        </nav>
-        <div class="logo">
-            <a href="{% url 'index' %}">
-                <img class="logo-img-white" src="{% static 'exchange/img/mana_logowhite.png' %}" alt="Logo de Mana Money Exchange">
-            </a>
-        </div>
-        <div class="false-div">
-        </div>
-    </header>
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+    {% block content %}
+    {% endblock %}
+
+    <!-- Script para animaciones con scroll -->
+    <script src="{% static 'exchange/script.js' %}"></script>
+    {% block scripts %}
+    {% endblock %}
 </body>
 </html>
