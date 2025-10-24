@@ -1323,7 +1323,21 @@ main {
     margin-bottom: 5px;
 }
 
-#divisa-modal #divisa-form input {
+.flag-display {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.flag-icon {
+    width: 50px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+#divisa-modal #divisa-form input,
+#divisa-modal #divisa-form select {
     width: 100%;
     padding: 10px;
     border: 2px solid var(--second-color); /* Stronger border */
@@ -1334,7 +1348,8 @@ main {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-#divisa-modal #divisa-form input:focus {
+#divisa-modal #divisa-form input:focus,
+#divisa-modal #divisa-form select:focus {
     outline: none;
     border-color: var(--first-color);
     box-shadow: 0 0 0 3px rgba(33, 135, 212, 0.3); /* Focus style */
