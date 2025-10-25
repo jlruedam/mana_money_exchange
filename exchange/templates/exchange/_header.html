@@ -9,7 +9,9 @@
             <li><a href="{% url 'index' %}#Calculadora"><span class="material-symbols-outlined">calculate</span>Calculadora</a></li>
             <li><a href="{% url 'index' %}#oficina"><span class="material-symbols-outlined">location_on</span>Oficina</a></li>
             <li><a href="https://wa.link/0eqprb" target="_blank"><span class="material-symbols-outlined">chat</span>Contáctanos</a></li>
+            {% if user.is_authenticated %}
             <li><a href="{% url 'divisa_list' %}"><span class="material-symbols-outlined">currency_exchange</span>Administrar Divisas</a></li>
+            {% endif %}
         </ul>
     </nav>
     <div class="logo">

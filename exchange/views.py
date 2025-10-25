@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 import json
@@ -67,12 +68,14 @@ def tv_view(request):
     divisas = Divisa.objects.all()
     return render(request, 'exchange/tv-view.html', {'divisas': divisas})
 
+@login_required
 def divisa_list(request):
     divisas = Divisa.objects.all()
     flag_choices_data = get_flag_choices()
     form = DivisaForm()
     return render(request, 'exchange/divisa_list.html', {'divisas': divisas, 'form': form, 'flag_choices': flag_choices_data})
 
+@login_required
 def divisa_create(request):
     flag_choices_data = get_flag_choices()
     if request.method == 'POST':
@@ -81,6 +84,7 @@ def divisa_create(request):
             form.save()
     return redirect('divisa_list')
 
+@login_required
 def divisa_edit(request, pk):
     divisa = get_object_or_404(Divisa, pk=pk)
     flag_choices_data = get_flag_choices()
