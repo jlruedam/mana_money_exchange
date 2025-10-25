@@ -1,3 +1,5 @@
+from django.contrib.auth import logout
+from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponse
@@ -6,7 +8,7 @@ import requests
 from django.contrib.staticfiles.storage import staticfiles_storage
 
 from .models import Divisa
-from .forms import DivisaForm
+from .forms import DivisaForm, CustomLoginForm
 
 def get_flag_choices():
     import logging
@@ -93,3 +95,11 @@ def divisa_edit(request, pk):
         if form.is_valid():
             form.save()
     return redirect('divisa_list')
+
+class CustomLoginView(LoginView):
+    template_name = 'exchange/login.html'
+    form_class = CustomLoginForm
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')

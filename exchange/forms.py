@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import AuthenticationForm
 from django import forms
 from .models import Divisa
 
@@ -17,3 +18,9 @@ class DivisaForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             if field_name != 'bandera': 
                 field.widget.attrs['class'] = 'form-control'
+
+class CustomLoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({'class': 'form-control'})
+        self.fields['password'].widget.attrs.update({'class': 'form-control'})

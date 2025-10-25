@@ -16,7 +16,12 @@
                 <li><a href="/#Calculadora"><span class="material-symbols-outlined">calculate</span>Calculadora</a></li>
                 <li><a href="/#oficina"><span class="material-symbols-outlined">location_on</span>Oficina</a></li>
                 <li><a href="https://wa.link/0eqprb" target="_blank"><span class="material-symbols-outlined">chat</span>Contáctanos</a></li>
+                {% if user.is_authenticated %}
                 <li><a href="{% url 'divisa_list' %} "><span class="material-symbols-outlined">currency_exchange</span>Administrar Divisas</a></li>
+                <li><a href="{% url 'logout' %}"><span class="material-symbols-outlined">logout</span>Salir</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}"><span class="material-symbols-outlined">login</span>Login</a></li>
+                {% endif %}
             </ul>
         </nav>
         <div class="logo">
