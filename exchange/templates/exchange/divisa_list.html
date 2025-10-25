@@ -52,6 +52,7 @@
                             data-compra="{{ divisa.compra }}"
                             data-venta="{{ divisa.venta }}"
                             data-bandera="{{ divisa.bandera }}">Editar</button>
+                    <a href="{% url 'divisa_delete' pk=divisa.pk %}" class="button delete-btn" onclick="return confirm('¿Estás seguro de que quieres eliminar esta divisa?');">Eliminar</a>
                 </div>
             </li>
             {% endfor %}

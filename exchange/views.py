@@ -96,6 +96,12 @@ def divisa_edit(request, pk):
             form.save()
     return redirect('divisa_list')
 
+@login_required
+def divisa_delete(request, pk):
+    divisa = get_object_or_404(Divisa, pk=pk)
+    divisa.delete()
+    return redirect('divisa_list')
+
 class CustomLoginView(LoginView):
     template_name = 'exchange/login.html'
     form_class = CustomLoginForm
