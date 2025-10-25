@@ -1,6 +1,6 @@
 {% extends 'exchange/base.html' %}
 {% load static %}
-{% load humanize %}
+{% load humanize exchange_filters %}
 
 {% block title %}Mana Money Exchange - Casa de Cambio en Cartagena | Mejores Tasas{% endblock %}
 
@@ -45,8 +45,8 @@
                         <td class="table-flag">
                             <img src="{% url 'flag_proxy' flag_code=divisa.bandera %}" alt="Bandera de {{ divisa.nombre }}">{{ divisa.nombre }}
                         </td>
-                        <td>${{ divisa.compra|intcomma }}</td>
-                        <td>${{ divisa.venta|intcomma }}</td>
+                        <td>${{ divisa.compra|format_decimal }}</td>
+                        <td>${{ divisa.venta|format_decimal }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

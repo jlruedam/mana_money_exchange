@@ -1,5 +1,5 @@
 {% load static %}
-{% load humanize %}
+{% load humanize exchange_filters %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -32,10 +32,10 @@
               <img src="https://flagcdn.com/{{ divisa.bandera }}.svg" alt="Bandera de {{ divisa.nombre }}">
               <h2>{{ divisa.nombre }}</h2>
               <p>
-                {{ divisa.compra|intcomma }}
+                ${{ divisa.compra|format_decimal }}
               </p>
               <p>
-                {{ divisa.venta|intcomma }}
+                ${{ divisa.venta|format_decimal }}
               </p>
           </div>
           {% endfor %}

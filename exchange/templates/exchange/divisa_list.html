@@ -1,6 +1,6 @@
 {% extends 'exchange/base.html' %}
 {% load static %}
-{% load humanize %}
+{% load humanize exchange_filters %}
 
 {% block title %}Administrar Divisas - Mana Money Exchange{% endblock %}
 
@@ -37,8 +37,8 @@
                 <div class="divisa-info">
                     <img src="{% url 'flag_proxy' flag_code=divisa.bandera %}" alt="Bandera de {{ divisa.nombre }}" class="divisa-flag">
                     <span>{{ divisa.nombre }}</span>
-                    <span>Compra: ${{ divisa.compra|intcomma }}</span>
-                    <span>Venta: ${{ divisa.venta|intcomma }}</span>
+                    <span>Compra: ${{ divisa.compra|format_decimal }}</span>
+                    <span>Venta: ${{ divisa.venta|format_decimal }}</span>
                 </div>
                 <div class="divisa-actions">
                     <button class="button edit-btn" 
