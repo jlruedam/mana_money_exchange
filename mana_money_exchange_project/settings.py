@@ -125,9 +125,7 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'divisa_list'
 LOGOUT_REDIRECT_URL = '/'
 STATIC_ROOT = BASE_DIR / 'static'
-STATICFILES_DIRS = [
-    BASE_DIR / 'exchange/static',
-]
+STATICFILES_DIRS = []
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
