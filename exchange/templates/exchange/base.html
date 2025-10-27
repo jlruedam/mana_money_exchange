@@ -48,6 +48,36 @@
     <!-- Script para animaciones con scroll -->
     <script src="{% static 'exchange/script.js' %}"></script>
     {% block scripts %}
+    <script>
+        (function() {
+            const tvViewUrl = "{% url 'tv_view' %}";
+            const indexUrl = "{% url 'index' %}";
+            const currentPagePath = window.location.pathname;
+
+            function checkTvScreen() {
+                // Define what constitutes a "TV screen"
+                // Example: Full HD resolution or larger
+                const tvMediaQuery = window.matchMedia('(min-width: 1920px) and (min-height: 1080px)');
+
+                // Check if the current page is already the TV view
+                const isTvViewPage = currentPagePath.includes(tvViewUrl);
+
+                if (tvMediaQuery.matches && !isTvViewPage) {
+                    // Redirect to the TV view page
+                    window.location.href = tvViewUrl;
+                } else if (!tvMediaQuery.matches && isTvViewPage) {
+                    // If currently on TV view page but screen size is no longer TV-like, redirect to index
+                    window.location.href = indexUrl;
+                }
+            }
+
+            // Run on page load
+            checkTvScreen();
+
+            // Run on screen resize
+            window.addEventListener('resize', checkTvScreen);
+        })();
+    </script>
     {% endblock %}
 </body>
 </html>
