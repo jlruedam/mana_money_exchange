@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-t4su$6-t-4wo7oi@5@ss(=87@u9th2-lpps=mlo6$&9hheajbm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -133,3 +133,12 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesSto
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STORAGES = {
+  "staticfiles": {
+    "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+  },
+  "default": {
+    "BACKEND": "django.core.files.storage.FileSystemStorage",
+  },
+}
