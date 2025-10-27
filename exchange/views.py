@@ -9,6 +9,7 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 
 from .models import Divisa
 from .forms import DivisaForm, CustomLoginForm
+from .calc import calculadora # Add this import
 
 def get_flag_choices():
     import logging
@@ -59,12 +60,18 @@ def calculate(request):
         amount = float(data['amount'])
 
         divisa = Divisa.objects.get(nombre=currency)
-        if action == 'Comprar':
-            result = amount * float(divisa.compra)
-        else:
-            result = amount * float(divisa.venta)
         
-        return JsonResponse({'result': result})
+        # Get compra and venta prices from the divisa object
+        precio_compra = float(divisa.compra)
+        precio_venta = float(divisa.venta)
+
+        # Instantiate the calculadora class
+        calc_instance = calculadora(action, precio_compra, precio_venta, amount)
+        
+        # Get the formatted message from the calculator
+        formatted_message = calc_instance.calcular()
+        
+        return JsonResponse({'result': formatted_message}) # Return the formatted message
 
 def tv_view(request):
     divisas = Divisa.objects.all()
