@@ -1,3 +1,4 @@
+(function() {
 
 const observerOptions = {
     threshold: 0.1, 
@@ -120,3 +121,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+})();
