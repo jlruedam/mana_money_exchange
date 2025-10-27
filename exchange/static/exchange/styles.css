@@ -968,13 +968,14 @@ header .false-div{
     text-align: left;
     color: var(--first-color);
     margin-bottom: 10px;
+    font-size: 1.4rem;
 }
 
 .semi-footer-container p{
     width: 100%;
     text-align: left;
     color: white;
-    font-size: 1.4rem;
+    font-size: 1rem;
     margin-bottom: 20px;
 }
 
@@ -1037,7 +1038,7 @@ header .false-div{
         font-size: 1rem;
     }
     .semi-footer-container h2{
-        font-size: clamp(1.4rem, 4dvw, 1.8rem);
+        font-size: 1rem;
     }   
     .social-media ul li a img{
         width: 50px;
